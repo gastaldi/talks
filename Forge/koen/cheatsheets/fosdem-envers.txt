@@ -1,0 +1,116 @@
+************* STEP 1 *************
+@Test
+public void testAuditEntity() throws Exception {
+  initializeJavaProject();
+  DependencyFacet deps = getProject().getFacet(DependencyFacet.class);
+  Dependency enversDep = DependencyBuilder.create("org.hibernate:hibernate-envers");
+  Assert.assertFalse(deps.hasDirectDependency(enversDep));
+  getShell().execute("envers setup");
+  Assert.assertTrue(deps.hasDirectDependency(enversDep));
+}
+
+@Inject
+private Project project;
+	
+@SetupCommand
+public void setup() {
+  DependencyFacet deps = project.getFacet(DependencyFacet.class);
+  DependencyBuilder apiDeps = DependencyBuilder
+    .create("org.hibernate:hibernate-envers:4.0.1.Final")
+    .setScopeType(ScopeType.PROVIDED);
+  deps.addDirectDependency(apiDeps);
+}
+
+
+************* STEP 2 *************
+@Test
+public void testAuditEntity() throws Exception {
+  initializeJavaProject();
+  DependencyFacet deps = getProject().getFacet(DependencyFacet.class);
+  Dependency enversDep = DependencyBuilder.create("org.hibernate:hibernate-envers");
+  Assert.assertFalse(deps.hasDirectDependency(enversDep));
+  getShell().execute("envers setup");
+  Assert.assertTrue(deps.hasDirectDependency(enversDep));
+  getShell().execute("project install-facet forge.spec.jpa");
+  getShell().execute("entity --named Entity --package com.test.domain");
+}
+
+    <dependency>
+      <groupId>org.jboss.forge</groupId>
+      <artifactId>forge-javaee-api</artifactId>
+      <version>${forge.api.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.forge</groupId>
+      <artifactId>forge-javaee-impl</artifactId>
+      <version>${forge.api.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
+************* STEP 3 *************
+@Test
+public void testAuditEntity() throws Exception {
+  initializeJavaProject();
+  DependencyFacet deps = getProject().getFacet(DependencyFacet.class);
+  Dependency enversDep = DependencyBuilder.create("org.hibernate:hibernate-envers");
+  Assert.assertFalse(deps.hasDirectDependency(enversDep));
+  getShell().execute("envers setup");
+  Assert.assertTrue(deps.hasDirectDependency(enversDep));
+  getShell().execute("project install-facet forge.spec.jpa");
+  getShell().execute("entity --named Entity --package com.test.domain");
+  JavaClass entity = (JavaClass)((JavaResource)getShell().getCurrentResource()).getJavaSource();
+  Assert.assertFalse(entity.hasAnnotation(Audited.class));
+}
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-envers</artifactId>
+      <version>4.0.1.Final</version>
+    </dependency>
+
+
+************* STEP 4 *************
+@Test
+public void testAuditEntity() throws Exception {
+  initializeJavaProject();
+  DependencyFacet deps = getProject().getFacet(DependencyFacet.class);
+  Dependency enversDep = DependencyBuilder.create("org.hibernate:hibernate-envers");
+  Assert.assertFalse(deps.hasDirectDependency(enversDep));
+  getShell().execute("envers setup");
+  Assert.assertTrue(deps.hasDirectDependency(enversDep));
+  getShell().execute("project install-facet forge.spec.jpa");
+  getShell().execute("entity --named Entity --package com.test.domain");
+  JavaClass entity = (JavaClass)((JavaResource)getShell().getCurrentResource()).getJavaSource();
+  Assert.assertFalse(entity.hasAnnotation(Audited.class));
+  getShell().execute("envers audit-entity");
+  entity = (JavaClass)((JavaResource)getShell().getCurrentResource()).getJavaSource();
+  Assert.assertTrue(entity.hasAnnotation(Audited.class));
+}
+
+@Command("audit-entity")
+public void auditEntity(PipeOut out) throws FileNotFoundException {
+}
+
+
+************* STEP 5 *************
+@Inject
+@Current
+private Resource<?> currentResource;
+	
+@Command("audit-entity")
+public void auditEntity(PipeOut out) throws FileNotFoundException {
+  if (currentResource instanceof JavaResource) {
+    JavaSource<?> javaSource = ((JavaResource)currentResource).getJavaSource();
+    if (javaSource.hasAnnotation(Entity.class)) {
+      javaSource.addAnnotation(Audited.class);
+      JavaSourceFacet javaSourceFacet = project.getFacet(JavaSourceFacet.class);
+      javaSourceFacet.saveJavaSource(javaSource);
+      ShellMessages.success(out, "Auditing [" + javaSource.getQualifiedName() + "]");
+      return;
+    }
+  }
+  ShellMessages.error(out, "Current resource must be a domain @Entity.");
+}
+

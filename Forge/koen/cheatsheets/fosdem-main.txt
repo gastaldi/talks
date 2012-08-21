@@ -1,0 +1,23 @@
+scaffold from-entity
+rest setup
+rest endpoint-from-entity
+//debug on server
+//add 'bauntie'
+//add 'leejz'
+//remove app from server
+forge find-plugin arquillian
+forge git-plugin git://github.com/forge/plugin-arquillian.git
+arquillian setup --container JBOSS_AS_REMOTE_7.X 
+arquillian create-test --class com.inventory.domain.Article.java
+//add JBOSS_AS_REMOTE_7.X profile to Maven project properties
+//debug ArticleEndpointTest as JUnit test 
+//implement testListAll()
+//set breakpoint
+//debug ArticleEndpointTest as JUnit test
+
+//explain envers project
+
+new-project --named envers --topLevelPackage org.jboss.forge.envers
+plugins setup
+plugins new-plugin --named EnversPlugin
+//implement envers plugin using the cheat sheets
