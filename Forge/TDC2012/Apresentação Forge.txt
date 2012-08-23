@@ -1,0 +1,26 @@
+Idéias do que mostrar na TDC:
+
+- Bio (Quem sou Eu ? - Twitter)
+
+- Explicar o que é o Forge: 
+O JBoss Forge é uma IDE baseada em linha de comando, que auxilia na criação de aplicações Java EE 6.0, pronta para produção. Possui plugins que geram interfaces do usuário, configuram a aplicação baseado no servidor de aplicação desejado e muito mais !
+- Demo:
+    - Gerar persistencia
+    - Gerar um CRUD
+
+    - Rodar no Eclipse
+    - OpenShift
+- What the fuck happened ? 
+- Explicar sobre a arquitetura
+- Explicar sobre plugins
+- CDI é a base de tudo
+
+- Plugins, Plugins, Plugins !!!
+
+JBoss Forge: 
+http://www.jboss.org/forge
+http://forge.jboss.org
+
+Notes: 
+
+- Qual o problema do Java EE ? 

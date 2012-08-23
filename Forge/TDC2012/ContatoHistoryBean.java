@@ -1,4 +1,4 @@
-package com.inventory.view;
+package com.lista.app.view;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -14,29 +14,29 @@ import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.query.AuditEntity;
 
-import com.inventory.domain.Article;
+import com.lista.app.Contato;
 
 @Named
 @RequestScoped
-public class ArticleHistoryBean {
+public class ContatoHistoryBean {
 
 
     @PersistenceContext
     private EntityManager entityManager;
     
-    private List<ArticleHistoryEntry> list;
+    private List<ContatoHistoryEntry> list;
 
-    public List<ArticleHistoryEntry> getList() {
+    public List<ContatoHistoryEntry> getList() {
         if (list == null) {
             AuditReader auditReader = AuditReaderFactory.get(entityManager);
             @SuppressWarnings({"unchecked"}) List<Object[]> revDatas = (List<Object[]>) auditReader
                     .createQuery()
-                    .forRevisionsOfEntity(Article.class, false, false)
+                    .forRevisionsOfEntity(Contato.class, false, false)
                     .add(AuditEntity.id().eq(id))
                     .getResultList();
-            list = new ArrayList<ArticleHistoryEntry>();
+            list = new ArrayList<ContatoHistoryEntry>();
             for (Object[] revData : revDatas) {
-                list.add(new ArticleHistoryEntry((Article) revData[0], (DefaultRevisionEntity) revData[1]));
+                list.add(new ContatoHistoryEntry((Contato) revData[0], (DefaultRevisionEntity) revData[1]));
             }
         }
         return list;
@@ -51,21 +51,21 @@ public class ArticleHistoryBean {
     public void setId(Long id) {
         this.id = id;
     }
-    public static class ArticleHistoryEntry {
-        private final Article article;
+    public static class ContatoHistoryEntry {
+        private final Contato contato;
         private final String changeDate;
 
-        public ArticleHistoryEntry(Article article, DefaultRevisionEntity revision) {
-            this.article = article;
+        public ContatoHistoryEntry(Contato contato, DefaultRevisionEntity revision) {
+            this.Contato = contato;
             this.changeDate = DateFormat.getTimeInstance().format(revision.getRevisionDate());
    }
  	   public String getChangeDate() {
           return changeDate;
      }
 
-        public Article getArticle() {
+        public Contato getContato() {
 
-            return article;
+            return contato;
 
       }
 	

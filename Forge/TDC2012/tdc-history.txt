@@ -1,0 +1,6 @@
+cp history.xhtml ~/Fosdem/workspace/inventory/src/main/webapp/scaffold/article
+cp ArticleHistoryBean.java ~/Fosdem/workspace/inventory/src/main/java/com/inventory/view/
+
+			<h:link value="History" outcome="history">
+			    <f:param name="id" value="#{contatoBean.id}"/>
+			</h:link>

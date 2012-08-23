@@ -1,0 +1,34 @@
+************* STEP 1 *************
+@Test
+public void testListAll() {
+  List<Contato> contatos = contatoendpoint.listAll();
+  Assert.assertEquals(1, contatos.size());
+}
+
+
+************* STEP 2 *************
+@PersistenceContext EntityManager entityManager;
+
+@Inject private UserTransaction userTransaction;
+
+@Before
+public void setup() throws Exception {
+  Contato contato = new Contato();
+  contato.setNome("George");
+  contato.setCelular("111111");
+  contato.setResidencial("22222");
+  userTransaction.begin();
+  entityManager.joinTransaction();
+  entityManager.persist(contato);
+  userTransaction.commit();    	
+}
+    
+@After
+public void destroy() throws Exception {
+  userTransaction.begin();
+  entityManager.joinTransaction();
+  entityManager.createQuery("DELETE from Contato").executeUpdate();
+  userTransaction.commit();
+}
+
+
