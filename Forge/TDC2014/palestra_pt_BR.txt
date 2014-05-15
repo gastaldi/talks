@@ -1,0 +1,21 @@
+JBoss Forge 2: Tornando sua IDE interessante de novo
+
+Está complicado criar extensões para a sua IDE favorita? As ferramentas existentes não produzem um código seguindo melhores práticas? Quer criar uma aplicação JavaEE 6 ou 7 e tem dificuldade em configurar um projeto novo ou já existente?  
+
+JBoss Forge, um projeto da comunidade JBoss, permite aos desenvolvedores adicionar suas próprias extensões para os seus frameworks preferidos e compartilhá-los.O JBoss Forge não é somente uma ferramenta de desenvolvimento rápido de aplicações, mas uma plataforma para a criação de ferramentas reusáveis que podem tornar você e o seu grupo mais eficientes.
+
+Nesta sessão, os participantes aprenderão sobre:
+
+- O ecosistema de extensões do JBoss Forge, com contribuições dos core developers JBoss e da comunidade;
+- Como construir uma aplicação usando as extensões fornecidas pelo JBoss Forge;
+- Como construir uma extensão Forge em 5 minutos, testá-la, executar no Eclipse, vê-la executando na interface de linha de comando e permitir o reuso em uma aplicação Java qualquer;
+
+Você também irá descobrir que é possível usar o Forge para promover seus próprios produtos.
+
+
+
+George é engenheiro de software da RedHat desde 2012. Possui várias certificações Java (entre elas SBCD, SBWCD, SCEA), trabalha profissionalmente com Java desde 2000. Atualmente é core developer do projeto JBoss Forge.
+
+https://twitter.com/gegastaldi
+http://lnkd.in/D4m-DV
+http://gastaldi.wordpress.com
