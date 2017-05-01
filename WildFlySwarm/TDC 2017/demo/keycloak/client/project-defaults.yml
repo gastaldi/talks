@@ -1,0 +1,20 @@
+swarm:
+   keycloak:
+      secure-deployments:
+         app.war:
+            realm: wildfly-swarm-keycloak-example
+            bearer-only: true
+            auth-server-url: http://localhost:8180/auth
+            ssl-required: external
+            resource: wildfly-swarm-keycloak-example
+            enable-cors: true
+   deployment:
+      app.war:
+         web:
+           login-config:
+             auth-method: KEYCLOAK
+           security-constraints:
+             - url-pattern: /rest/secure
+               methods: [GET]
+               roles: [admin]
+
